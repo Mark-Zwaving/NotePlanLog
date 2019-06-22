@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-12">
+    <fieldset class="border p-3 m-3 rounded" style="background-color: #e3f2fd;">
+      <legend class="w-auto p-3">
+        <button class="btn-xs btn-info mr-4 small" type="button"
+                data-toggle="collapse" data-target="#id_alg_info"
+                aria-expanded="false" aria-controls="id_alg_info"
+                data-placement="top" title="Show or hide the log">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+        </button>
+          Informatie
+      </legend>
+      <p class="text-muted">
+        Website gemaakt in het kader van keuzemodule 3 in periode 2 van leerjaar 3.
+        Het onderwerp is webprogrammeren in Python, Django, MySQL en Bootstrap.
+      </p>
+      <p id="id_alg_info" class="collapse text-muted">
+        <strong> Beoogde website was te uitgebreid </strong> <br />
+        Het is niet mogelijk geweest om in dit kader een volledige werkende project-pagina met scrumprocessen en methodieken te gaan ontwikkelen.
+        Hiervoor zou nog minimaal twee à drie weken (voltijd) extra ontwikkeltijd voor nodig zijn.
+        Het ontwikkelen en bestuderen van de theorie voor deze website zit momenteel al rond de 10 à 15 EC.
+        De leercurve voor het maken van een dergelijk geavanceerde website in Python, Django en Bootstrap is, in zijn totaliteit, relatief hoog gebleken.
+        Daarbij zit normaliter al een groot aantal uren in het maken, ontwikkelen, debuggen en ook testen van een dergelijke website.
+        <br /> <br />
+        <strong> Geen minimalisme en redelijk geavanceerd </strong> <br />
+        Helaas moest op een bepaald moment moest worden gestopt met het verder ontwikkelen van de website.
+        Er had zeker nog meer kunnen worden toegevoegd of uitgebreid.
+        Maar er moet ook tijd zijn voor andere vakken. Jammer maar dat is niet anders.
+        Zodra de tijd ervoor is wordt in een later stadium de website alsnog uitgebreid met een project-gedeelte gebaseerd op scrum.
+        Maar voor nu is het meer dan voldoende.
+        <br><br>
+        De notitiepagina enkel toegevoegd omdat ik het handig en leuk vind om te hebben.
+        De meest geavanceerde pagina's zijn, de log- en planningspagina.
+        Hierin kunnen planningen en logs worden gelezen, gemaakt, bewerkt en of verwijderd.
+        Daarnaast is het mogelijk om een gebruiker te registreren.
+        Om de in- en uitvoer vanaf de website te checken is een foutenafhandelingssysteem ontwikkeld.
+        Dit wordt vooral bij het registreren van een gebruiker toegepast.
+        Ook is aandacht aan security besteed. Dit bovenop de security features van Django zelf.
+        De website maakt daarnaast gebruikt van de admin van Django.
+        Ook is een vertalingmechanisme toegevoegd maar dit is nog niet helemaal uitontwikkelt en nog niet geïmplementeerd.
+        Alles zit achter een loginsysteem toegevoegd met twee niveau's. Een superuser en een gewone user.
+        Een superuser heeft toegang tot het admin-gedeelte. Een 'gewone' user niet.
+        Uiteraard bevat het systeem ook een database. Voor de database is gebruikt gemaakt van MySQL.
+        Dit wordt nu eenmaal veel gebruikt op het web.
+        Zie hieronder voor een foto van de (in dit geval) MySQL database.
+        <img src="{% static "img/database.png" %}"
+             class="my-4 rounded img-responsive img-fluid shadow border"
+             alt="Database" />
+        De gegevens, gebruikt voor deze pagina, zijn gekoppeld op de al aanwezige databaseframework van Django zelf.
+        Dit is gedaan zodat ten volle gebruik gemaakt kan worden van de vele mogelijkheden, bijvoorbeeld in security en de admin pagina die Django biedt.
+        De MySQL database kan daarnaast goed worden beheerd door phpMyAdmin. Dat was wel een voordeel van een MySQL database.
+        <br><br>
+        De styling en opmaak van deze website is gedaan met bootstrap. Moet gezegd dat bootstrap een erg handige tool is en de website ziet er verder prima uit.
+        <br /> <br />
+        <strong> Al met al een prima leerresultaat </strong> <br />
+        In dit geval het snel afronden van een beperkte website, heb ik niet zo veel aan.
+        Want dan is het leerresultaat te beperkt om er iets aan te hebben.
+        En dat is nu zeker niet het geval.
+        Ik ben dan ook erg tevreden met het behaalde leerresultaat en nu in staat om Python en Django (en ook bootstrap) te doceren en kan dit ook aangeven, middels deze website.
+        <br /> <br />
+        De website wordt door mij daadwerkelijk gebruikt voor het plannen, loggen en maken van notities.
+        Het werkt relatief prettig en handig.
+        Al met al is, naar mijn idee, een prachtige en geavanceerde website opgeleverd.
+      </p>
+    </fieldset>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <fieldset class="border p-3 m-3 rounded" style="background-color: #e3f2fd;">
+      <legend class="w-auto p-3">
+        <button class="btn-xs btn-info mr-4 small" type="button"
+                data-toggle="collapse" data-target="#id_overig_leerdoelen"
+                aria-expanded="false" aria-controls="id_overig_leerdoelen"
+                data-placement="top" title="Show or hide the log">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+        </button>
+          Grootste leerdoelen
+      </legend>
+
+      <div class="row">
+        <div class="col-1"> Python </div>
+        <div class="col-3">
+          <a href="https://www.python.org" target="_blank">
+            <img src="{% static "img/python.png" %}"
+                 class="rounded img-responsive img-fluid"
+                 style="height:90px" alt="Logo Python" />
+          </a>
+        </div>
+        <div class="col-1">
+          Django
+        </div>
+        <div class="col-3">
+          <a href="https://www.djangoproject.com" target="_blank">
+            <img src="{% static "img/django.png" %}" class="rounded img-responsive img-fluid" style="height:90px" alt="Logo Django" />
+          </a>
+        </div>
+        <div class="col-1 text-nowrap">
+           Bootstrap 4
+        </div>
+        <div class="col-3">
+          <a href="https://getbootstrap.com" target="_blank">
+            <img src="{% static "img/bootstrap.png" %}" class="rounded img-responsive img-fluid" style="height:90px" alt="Logo Bootstrap" />
+          </a>
+        </div>
+      </div>
+
+      <div class="row collapse" id="id_overig_leerdoelen">
+        <div class="col-12 text-muted">
+          <hr>
+          De overig leerdoelen en verdieping MySQL, JavaScript/Ecmascript 6, Awesome fonts, HTML5 aria elementen, Scrum! en in mindere mate, CSS en JQuery.
+          Daarnaast was het mooi om te zien dat de intregratie tussen de verschillende talen/tools zoals bijvoorbeeld Ecmascript, Python en bootstrap, goed werkte.
+          Dit is bijvoorbeeld het geval bij de 'pagination'.
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <fieldset class="border p-3 m-3 rounded" style="background-color: #e3f2fd;">
+      <legend class="w-auto p-3">
+        <button class="btn-xs btn-info mr-4 small"
+                type="button"
+                data-toggle="collapse" data-target="#id_keuzemodule_3"
+                aria-expanded="false" aria-controls="id_keuzemodule_3"
+                data-placement="top" title="Show or hide the log">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+        </button>
+          Algemene gegevens keuzemodule 3
+      </legend>
+
+        <table id="id_keuzemodule_3" class="table table-striped table-borderless collapse">
+          <tr> <th> Student nr. </th> <td> 1089624 </td> </tr>
+          <tr> <th> Naam </th> <td> Mark Zwaving </td> </tr>
+          <tr> <th> E-mail </th> <td> mark.zwaving@windesheim.nl  </td> </tr>
+          <tr> <th> Code </th> <td> ENBO-ICT.E7.X.18 </td> </tr>
+          <tr> <th> Klas </th> <td> OWG_BO-ICT3D </td> </tr>
+          <tr> <th> Leerjaar </th> <td> 3 </td> </tr>
+          <tr> <th> Periode </th> <td> 2 </td> </tr>
+          <tr> <th> Vak </th> <td> Keuzemodule 3 </td> </tr>
+          <tr> <th> Onderwerp </th> <td> Python, Django, Bootstrap</td> </tr>
+          <tr> <th> Instelling </th> <td> Hogeschool Windesheim, Zwolle </td> </tr>
+          <tr> <th> Niveau </th> <td> Tweedegraads Lerarenopleiding HBO </td> </tr>
+          <tr> <th> Variant </th> <td> Technisch Beroepsonderwijs, ICT </td> </tr>
+          <tr> <th> Type </th> <td> Deeltijd Blended Learning </td> </tr>
+          <tr> <th> Datum </th> <td> Juni 2019 </td> </tr>
+        </table>
+      </div>
+    </fieldset>
+  </div>
+</div>
+
+{% endblock content %}

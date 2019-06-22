@@ -1,0 +1,40 @@
+
+.notes{
+	font-family: cambria;
+	position: relative;
+	display: inline-block;
+	border: 1px solid rgba(241,218,54,1);
+	padding: 1rem;
+	min-height: 200px;
+	margin: 2rem 2rem;
+	box-shadow: 3px 3px 2px rgba(50,50,50,.6);
+	border-radius: 1rem;
+	background: rgb(254,252,234); /* Old browsers */
+	background: linear-gradient(135deg,  rgba(254,252,234,1) 0%,rgba(241,218,54,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+div.notes:nth-child(even)
+{
+	transform: rotate(9deg);
+}
+
+div.notes:nth-child(odd)
+{
+	transform: rotate(-5deg);
+}
+
+div.notes:nth-child(3n-1)
+{
+	transform: rotate(2deg);
+}
+
+div.notes #close
+{
+	display: inline-block;
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	margin: 0;
+	padding: 0;
+}

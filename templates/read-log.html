@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% for log in logs %}
+<div id="show_{{log.num}}">
+  <div class="row my-2" id="row_id_{{log.id}}">
+    <div class="col-12">
+      <form id="form_id_{{log.id}}" action="/read-log/" method="POST"
+            class="needs-validation" {{page.form_validate}}>
+            {% csrf_token %}
+        <fieldset class="border p-1 rounded shadow-sm " style="background-color: #e3f2fd;">
+          <legend class="w-auto p-1 text-muted small">
+            <input type="hidden" id="hidden_id_{{log.id}}" name="id_log" value="{{log.id}}" />
+						<input type="hidden" id="link_act_{{log.id}}" name="link_act" value="{{page.link_act}}" />
+            <button type="button" style="width:34px;"
+                    name="open_log"
+                    class="btn-xs btn-info mr-2 rounded shadow-sm" aria-disabled="false"
+                    data-toggle="collapse" data-target="#row_text_{{log.id}}"
+                    aria-expanded="false" aria-controls="row_text_{{log.id}}"
+                    data-placement="top" title="Show or hide the log">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+            </button>
+            <button class="btn-xs btn-success mr-2 rounded shadow-sm"
+                    id="btn_edit" type="button"
+                    data-placement="top" title="Edit log" style="width:34px;"
+                    name="edit_log" value="edit_log" aria-disabled="false"
+                    onclick="edit_yn_all_log('{{log.id}}'); return false;">
+                    <i class="fas fa-edit" aria-hidden="true"></i>
+            </button>
+            <button class="btn-xs btn-primary mr-2 rounded shadow-sm disabled"
+                    id="btn_save_{{log.id}}"
+                    aria-disabled="true" aria-hidden="true" style="width:34px;"
+                    data-placement="top" title="Update log"
+                    name="update_log" value="update_log"
+                    disabled>
+                    <i class="fa fa-file" aria-hidden="true"></i>
+            </button>
+            <button class="btn-xs btn-warning btn-info mr-2 rounded shadow-sm "
+                    style="width:34px;"
+                    id="btn_hide_{{log.id}}" name="hide_log"
+                    onclick="delete_template('row_id_{{log.id}}'); return false;"
+                    data-placement="top" title="Remove log from screen">
+                    <i class="fa fa-eraser" aria-hidden="true"></i>
+            </button>
+            <button class="btn-xs btn-danger mr-4 rounded shadow-sm disabled"
+                    id="btn_delete_{{log.id}}"
+                    aria-disabled="true" aria-hidden="true" style="width:34px;"
+                    data-placement="top" title="Delete log id={{log.id}}"
+                    name="delete_log" value="delete_log"
+                    disabled>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+            {{log.date}}: <strong>{{log.title}}</strong>
+          </legend>
+
+          <div class="form-group row">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"> date </div>
+                </div>
+                <input id="date_{{log.id}}"
+                       name="date" class="form-control disabled"
+                       type="date" value="{{log.date}}"
+                       aria-disabled="true" disabled>
+            </div>
+
+            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-xs-12 input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"> van </div>
+              </div>
+              <input id="time_start_{{log.id}}"
+                     name="time_start" class="form-control disabled"
+                     type="time" value="{{log.time_start}}"
+                     aria-disabled="true" disabled>
+            </div>
+
+            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-xs-12 input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"> tot </div>
+              </div>
+              <input id="time_end_{{log.id}}"
+                     name="time_end" class="form-control disabled"
+                     type="time" value="{{log.time_end}}"
+                     aria-disabled="true" disabled>
+            </div>
+            <div class="col-xl-4 col-lg-8 col-md-12 col-sm-12 col-xs-12 input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    titel
+                  </div>
+                </div>
+                <input id="title_{{log.id}}" type="text"
+                       name="title" class="form-control disabled"
+                       placeholder="Titel" value="{{log.title}}"
+                       aria-disabled="true" disabled>
+            </div>
+          </div>
+
+          <div id="row_text_{{log.id}}" class="collapse">
+
+            <div class="form-group row">
+              <label for="inputEmail" class="col-2 col-form-label text-right text-nowrap"> Log</label>
+              <div class="form-group col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                <textarea class="form-control disabled" placeholder="Log hier..."
+                          name="text" rows="16" aria-disabled="true"
+                          id="text_{{log.id}}" disabled>{{log.text}}</textarea>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="area_succes_txt_{{log.id}}"
+                     class="col-2 col-form-label text-right text-nowrap">
+                Wat ging goed ?<br>
+                Successen ?
+               </label>
+              <div class="form-group col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                <textarea class="form-control disabled" placeholder="Successen ?"
+                          name="succes" rows="16" aria-disabled="true"
+                          id="succes_{{log.id}}" disabled>{{log.succes}}</textarea>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="area_fail_txt_{{log.id}}"
+                     class="col-2 col-form-label text-right text-nowrap">
+                Wat ging fout ?<br>
+                Tegenslagen ?
+               </label>
+              <div class="form-group col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                <textarea class="form-control disabled" placeholder="Tegenslagen ?"
+                          name="setback" rows="16" aria-disabled="true"
+                          id="setback_{{log.id}}" disabled>{{log.setback}}</textarea>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="area_reflect_txt_{{log.id}}"
+                     class="col-2 col-form-label text-right text-nowrap">
+                Reflectie
+               </label>
+              <div class="form-group col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                <textarea class="form-control disabled" placeholder="Reflectie"
+                          name="reflect" rows="16" aria-disabled="true"
+                          id="reflect_{{log.id}}" disabled>{{log.reflect}}</textarea>
+              </div>
+            </div>
+
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+<div class="row mt-4">
+	<div class="col-12">
+		<script>
+				// Globals needed for pagination
+				let MAX_ROW_PER_PAGE = {{ page.max_per_page }}, /* See init.py */
+						ALL_ROW_COUNT    = {{ page.rows_count }},
+						LINKS_ON_PAGE    = Math.ceil( ALL_ROW_COUNT / MAX_ROW_PER_PAGE ),
+						LINK_ACT         = {{ page.link_act }};
+				pagination();
+		</script>
+	</div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row container-fluid" style="margin: auto;">
+  <div class="col-12">
+
+    <div id="carouselExampleControls" class="carousel slide shadow rounded" data-ride="carousel">
+
+      <ol class="carousel-indicators text-secondary">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+
+      <div class="carousel-inner text-dark">
+''
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="{% static "img/logging.jpg" %}" alt="First slide" />
+          <div class="w-50 carousel-caption d-none d-md-block text-dark rounded shadow"
+               style="background-color: #e3f2fd; margin: auto;">
+            <h5>Log a day !</h5>
+            <p>What have you done? What went well? And what not?</p>
+          </div>
+        </div>
+        <div class="carousel-item text-dark">
+          <img class="d-block w-100" src="{% static "img/planning.jpg" %}" alt="Second slide" />
+          <div class="w-50 carousel-caption d-none d-md-block text-dark rounded shadow"
+               style="background-color: #e3f2fd; margin: auto;">
+            <h5>Plan a day !</h5>
+            <p>What needs to be done ?</p>
+          </div>
+        </div>
+        <div class="carousel-item text-dark">
+          <img class="d-block w-100" src="{% static "img/noting.jpg" %}" alt="Third slide" />
+          <div class="w-50 carousel-caption d-none d-md-block text-dark rounded shadow"
+               style="background-color: #e3f2fd; margin: auto;">
+            <h5>Sticky notes !</h5>
+            <p>Do not forget!</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="fas fa-chevron-circle-left text-dark shadow"></span>
+      <span class="sr-only text-dark">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="fas fa-chevron-circle-right text-dark shadow"></span>
+      <span class="sr-only text-dark">Next</span>
+    </a>
+
+  </div>
+</div>
+
+{% if not user.is_authenticated %}
+<div class="row container-fluid mt-5">
+  <div class="jumbotron col-12  shadow rounded">
+      <h1 class="display-6"> Welkom ! </h1>
+      <p class="lead"> Dit is een website om notities, planningen en logs op te slaan. </p>
+      <hr class="my-4">
+      <p> Klik op de buttons hieronder om je te registreren of om in te loggen. </p>
+      <hr class="my-4">
+      <a class="btn btn-primary btn-lg mr-4" href="/register/" role="button"> Registreer </a>
+      <a class="btn btn-primary btn-lg" href="/login/" role="button"> Login </a>
+  </div>
+</div>
+{% endif %}
+
+{% endblock content %}

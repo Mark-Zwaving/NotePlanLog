@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{page.head_language}}">
+	<head>
+			<title> {{page.head_title}} </title>
+			<meta charset="{{page.head_charset}}" />
+			<meta http-equiv="X-UA-Compatible"   content="IE=edge" />
+			<meta http-equiv="content-language"  content="{{page.web_language}}" />
+			<meta name="author"       content="{{page.head_author}}" />
+			<meta name="robots"       content="{{page.head_robots}}" />
+			<meta name="description"  content="{{page.head_description}}" />
+			<meta name="viewport"     content="{{page.head_viewport}}" />
+			<link rel="shortcut icon" href="{% static "img/scrum-logo.png"      %}"  type="image/x-png" />
+			<link rel="stylesheet"    href="{% static "css/font-awesome.css"  %}"  type="text/css" />
+			<link rel="stylesheet"    href="{% static "css/bootstrap.min.css" %}"  type="text/css" />
+			<link rel="stylesheet"    href="{% static "css/default-1.css" %}"  type="text/css" />
+			<script src="{%  static  "js/jquery.min.js"     %}"> </script>
+			<script src="{%  static  "js/bootstrap.min.js"  %}"> </script>
+			<script src="{%  static  "js/popper.min.js"     %}"> </script>
+			<script src="{%  static  "js/default-1.js"      %}"> </script>
+	</head>
+	<body class="bg-light p-2">
+		<div class="container-fluid rounded shadow bg-white p-3 mb-4"
+		     style="max-width: 1600px; border-radius: 1rem;">
+
+			<header class="shadow-sm">
+				{% include 'header.html' %}
+			</header>
+
+			<section class="container-fluid py-4">
+			  <div class="page-header">
+			    <h1> {{page.body_title}} </h1>
+			  </div>
+					{% block content %}
+
+					{% endblock content %}
+			</section>
+
+			<footer class="container-fluid">
+				{% include 'footer.html' %}
+			</footer>
+
+		</div>
+	</body>
+</html>

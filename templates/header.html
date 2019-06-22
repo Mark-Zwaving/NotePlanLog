@@ -1,0 +1,115 @@
+{% load static %}
+
+<div class="navbar-header">
+  <img src="{% static "img/air-atmosphere.jpg" %}"
+       class="mt-1 img-thumbnail img-responsive img-fluid"
+       style="border-radius: 1rem 1rem 0rem 0rem; "
+       alt="Responsive image">
+</div>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <a class="nav-link" href="#">
+    <img src="{% static "img/scrum-logo.png" %}" width="24" class="img-responsive img-fluid" alt="Logo">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav navbar-left mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-primary" href="/"><i class="fa fa-home" aria-hidden="true"></i>
+          Home
+        <span class="sr-only">(current)</span></a>
+      </li>
+
+{% if user.is_authenticated %}
+
+      <li class="nav-item">
+        <a class="nav-link text-primary" href="/notes/"><i class="far fa-sticky-note"></i> Notes </a>
+      </li>
+      <li class="dropdown">
+        <a class="nav-link dropdown-toggle text-primary" href="/logboek/" id="navbarDropdown"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+           <i class="fa fa-book" aria-hidden="true"></i>
+          Plan
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <a class="dropdown-item text-primary" href="/write-plan/">
+            <i class="fas fa-edit"></i>
+             Write
+           </a>
+          <a class="dropdown-item text-primary" href="/read-plan/">
+            <i class="fab fa-readme"></i>
+            Read
+          </a>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="nav-link dropdown-toggle text-primary" href="/logboek/" id="navbarDropdown"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+           <i class="fa fa-book" aria-hidden="true"></i>
+          Log
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <a class="dropdown-item text-primary" href="/write-log/">
+            <i class="fas fa-edit"></i>
+             Write
+           </a>
+          <a class="dropdown-item text-primary" href="/read-log/">
+            <i class="fab fa-readme"></i>
+            Read
+          </a>
+        </ul>
+      </li>
+
+      {% if user.is_superuser == 1 %}
+      <li>
+        <a class="nav-link text-primary" href="/secret-path/"><span class="fas fa-user-shield"></span> Admin </a>
+      </li>
+      {% endif %}
+
+{% endif %}
+
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right ml-auto">
+
+      <li class="nav-item">
+        <a class="nav-link text-primary" href="/about/"><span class="fas fa-info-circle"></span> Info </a>
+      </li>
+
+{% if user.is_authenticated %}
+
+      <!-- <li>
+        <a class="nav-link" href="/language/?lang=nl">
+          <img src="{% static "img/nl.png" %}" width="24" class="img-responsive img-fluid" alt="Select Netherlands">
+        </a>
+      </li>
+
+      <li>
+        <a class="nav-link" href="/language/?lang=en">
+          <img src="{% static "img/gb.png" %}" width="24" class="img-responsive img-fluid" alt="Select English">
+        </a>
+      </li> -->
+
+      <li>
+        <a class="nav-link text-primary" href="/logout/"><span class="fas fa-sign-out-alt"></span> Logout </a>
+      </li>
+
+{% else %}
+
+      <li>
+        <a class="nav-link text-primary" href="/register/"><span class="fas fa-user-plus"></span> Sign Up </a>
+      </li>
+      <li>
+        <a class="nav-link text-primary" href="/login/"><span class="fas fa-sign-in-alt"></span> Login </a>
+      </li>
+
+{% endif %}
+
+    </ul>
+
+  </div>
+</nav>

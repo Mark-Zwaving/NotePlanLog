@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h3>Welkom {{ user.username }}</h3>
+<p class="alert alert-danger">
+	U bent (nog steeds) ingelogd !
+</p>
+
+{% else %}
+<div class="alert alert-success">
+	U bent succesvol uitgelogd !
+</div>
+
+
+{% endif %}
+
+{% endblock content %}

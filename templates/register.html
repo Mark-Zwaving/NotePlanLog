@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% if not succes %}
+<form method="POST" action="/register/" class="needs-validation" {{page.form_validate}}>
+	{% csrf_token %}
+	<div class="form-group row">
+		<label class="col-3 col-form-label text-right text-nowrap" for="inputFirstName"> Voornaam   </label>
+		<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 input-group">
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					<i class="fas fa-user" aria-hidden="true"></i>
+				</div>
+			</div>
+		  <input id="inputFirstName" name="inputFirstName"
+			       class="form-control {{form_data.fname_class}}" type="text"
+			       placeholder="Voornaam" value="{{form_data.fname}}"
+			       minlength="1" maxlength="50" pattern=".{1,50}"
+						 {{page.input_required}} />
+		  {% if form_data.err_fname.found %}
+			 <div class="invalid-feedback">
+				 {% for err in form_data.err_fname.text %}
+ 					<strong>Error!</strong> {{ err }} <br>
+ 				{% endfor %}
+			 </div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="inputLastName" class="col-3 col-form-label text-right text-nowrap"> Achternaam   </label>
+		<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 input-group">
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					<i class="fas fa-user" aria-hidden="true"></i>
+				</div>
+			</div>
+			<input id="inputLastName" name="inputLastName"
+			       class="form-control {{form_data.lname_class}}" type="text"
+			       placeholder="Achternaam" value="{{form_data.lname}}"
+			       minlength="1" maxlength="50" pattern=".{1,50}"
+						 {{page.input_required}} />
+		   {% if form_data.err_lname.found %}
+			 <div class="invalid-feedback">
+				 {% for err in form_data.err_lname.text %}
+						 <strong>Error!</strong> {{ err }} <br>
+				 {% endfor %}
+			 </div>
+			 {% endif %}
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="inputEmail" class="col-3 col-form-label text-right text-nowrap"> E-mail   </label>
+		<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 input-group">
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					<i class="fa fa-envelope" aria-hidden="true"></i>
+				</div>
+			</div>
+			<input id="inputEmail" name="inputEmail" type="text"
+			       class="form-control {{form_data.email_class}}"
+			       placeholder="Email" value="{{form_data.email}}"
+						 minlength="6" maxlength="245" pattern="[^@\s]{1,250}@[^@\s]{1,63}\.[^@\s]{2,63}"
+						 {{page.input_required}} />
+			 {% if form_data.err_email.found %}
+			 <div class="invalid-feedback">
+				{% for err in form_data.err_email.text %}
+ 						<strong>Error!</strong> {{ err }} <br>
+ 			  {% endfor %}
+			 </div>
+			 {% endif %}
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="inputPhone" class="col-3 col-form-label text-right text-nowrap"> Telefoon </label>
+		<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 input-group">
+			<div class="input-group-prepend">
+				<div class="input-group-text"><i class="fas fa-phone" aria-hidden="true"></i></div>
+			</div>
+			<input id="inputPhone" name="inputPhone" type="text"
+			       class="form-control {{form_data.phone_class}}"
+		         minlength="10" maxlength="12" pattern="[\.\_\+\-\s0-9]{9,12}"
+			       placeholder="Telefoon" value="{{form_data.phone}}"
+						 {{page.input_required}} />
+		{% if form_data.err_phone.found %}
+		 <div class="invalid-feedback">
+			 {% for err in form_data.err_phone.text %}
+					 <strong>Error!</strong> {{ err }} <br>
+			 {% endfor %}
+		 </div>
+		{% endif %}
+		</div>
+	</div>
+
+		<div class="row">
+			<div class="col-3"> </div>
+			<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 alert alert-secondary small text-muted">
+		    	<strong>Password requirements</strong>: Between 12 an 30 characters.<br>
+					Use letters[a-Z], digits[0-9] and special-character[!@#$%^&*()_+-={}[]<>.,?.~`|]
+			</div>
+		</div>
+
+	<div class="form-group row">
+		<label for="inputPassword1" class="col-3 col-form-label text-right text-nowrap"> Wachtwoord   </label>
+		<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 input-group">
+			<div class="input-group-prepend">
+				<button class="input-group-text lock"
+				        onclick="show_hide_password('inputPassword1','lock1'); return false;">
+					<i id="lock1" class="fa fa-lock" aria-hidden="true"></i>
+				</button>
+			</div>
+			<input id="inputPassword1" name="inputPassword1"
+			       class="form-control {{form_data.password1_class}}" type="password"
+			       placeholder="Wachtwoord" value="{{form_data.password1}}"
+			       minlength="12" maxlength="30" pattern=".{12,30}"
+						 {{page.input_required}} />
+
+			 {% if form_data.err_password1.found %}
+			 <div class="invalid-feedback">
+				 {% for err in form_data.err_password1.text %}
+ 						<strong>Error!</strong> {{ err }} <br>
+ 				{% endfor %}
+			 </div>
+			 {% endif %}
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="inputPassword2" class="col-3 col-form-label text-right text-nowrap"> Herhaal wachtwoord   </label>
+		<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 input-group">
+			<div class="input-group-prepend">
+				<button class="input-group-text lock"
+				        onclick="show_hide_password('inputPassword2','lock2'); return false;">
+					<i id="lock2" class="fa fa-lock" aria-hidden="true"></i>
+				</button>
+			</div>
+			<input id="inputPassword2" name="inputPassword2"
+			       class="form-control {{form_data.password2_class}}" type="password"
+			       placeholder="Herhaal wachtwoord" value="{{form_data.password2}}"
+			       minlength="12" maxlength="30" pattern=".{12,30}"
+						 {{page.input_required}} />
+			 {% if form_data.err_password2.found %}
+			 <div class="invalid-feedback">
+				 {% for err in form_data.err_password2.text %}
+ 						<strong>Error!</strong> {{ err }} <br>
+ 				{% endfor %}
+			 </div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="inputGeboorteDatum" class="col-3 col-form-label text-right text-nowrap"> Birthday </label>
+		<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 input-group">
+			<div class="input-group-prepend">
+				<div class="input-group-text"><i class="fa fa-birthday-cake" aria-hidden="true"></i></div>
+			</div>
+			<input id="inputBirthday" name="inputBirthday"
+			       class="form-control {{form_data.birthday_class}}"
+				     min="1900-01-01" max="{{page.date_now}}"
+						 value="{{form_data.birthday}}" type="date"
+						 {{page.input_required}} />
+
+		 {% if form_data.err_birthday.found %}
+		 <div class="invalid-feedback">
+			 {% for err in form_data.err_birthday.text %}
+					 <strong>Error!</strong> {{ err }} <br>
+			 {% endfor %}
+		 </div>
+		 {% endif %}
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<label class="col-3 col-form-label text-right text-nowrap"> Geslacht </label>
+		<div class="col-lg-1 col-md-1 col-sm-9 col-xs-12 text-nowrap form-group {{form_data.gender_class}}">
+			<div class="custom-control custom-checkbox">
+				<input id="checkInputMaster" type="radio" value= "M"
+				       class="form-check-input {{form_data.gender_class}}"
+							 {% if 'M' in form_data.gender %} checked  {% endif %}
+							 name="radioInputGender" />
+				<label class="form-check-label" for="checkInputMaster">  Male  </label>
+			</div>
+			<div class="custom-control custom-checkbox">
+				<input id="checkInputOwner" type="radio" value="V"
+				       class="form-check-input {{form_data.gender_class}}"
+							 {% if 'V' in form_data.gender %} checked  {% endif %}
+							 name="radioInputGender" />
+				<label class="form-check-label" for="checkInputOwner">  Female  </label>
+			</div>
+			<div class="custom-control custom-checkbox">
+				<input id="checkInputMember" type="radio" value="N"
+				       class="form-check-input {{form_data.gender_class}}"
+							 {% if 'N' in form_data.gender %} checked  {% endif %}
+							  name="radioInputGender" />
+				<label class="form-check-label" for="checkInputMember">  Non-binair  </label>
+				{% if form_data.err_gender.found %}
+						<div class="invalid-feedback">
+							{% for err in form_data.err_gender.text %}
+									<strong>Error!</strong> {{ err }} <br>
+							{% endfor %}
+						</div>
+				{% endif %}
+			</div>
+		</div>
+		<label class="col-1 col-lg-1 col-md-2 col-sm-3 col-xs-3 col-form-label text-right text-nowrap"> Functie   </label>
+		<div class="col-lg-1 col-md-1 col-sm-9 col-xs-12 text-nowrap form-group {{form_data.function_class}}">
+			<div class="custom-control custom-checkbox">
+				<input id="checkInputMaster" type="checkbox" value= "S"
+				       class="form-check-input {{form_data.function_class}}"
+							 {% if 'S' in form_data.function %} checked  {% endif %}
+							 name="checkInputFunction" />
+				<label class="form-check-label" for="checkInputMaster">  Scrummaster  </label>
+			</div>
+			<div class="custom-control custom-checkbox">
+				<input id="checkInputOwner" type="checkbox" value="P"
+				       class="form-check-input {{form_data.function_class}}"
+							 {% if 'P' in form_data.function %} checked  {% endif %}
+							 name="checkInputFunction" />
+				<label class="form-check-label" for="checkInputOwner">  Product owner  </label>
+			</div>
+			<div class="custom-control custom-checkbox">
+				<input id="checkInputMember" type="checkbox" value="T"
+				       class="form-check-input {{form_data.function_class}}"
+							 {% if 'T' in form_data.function %} checked  {% endif %}
+							  name="checkInputFunction" />
+				<label class="form-check-label" for="checkInputMember">  Team member  </label>
+				{% if form_data.err_function.found %}
+						<div class="invalid-feedback">
+							{% for err in form_data.err_function.text %}
+									<strong>Error!</strong> {{ err }} <br>
+							{% endfor %}
+						</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<div class="row mt-3 mb-2">
+		<label class="col-3 col-form-label text-right text-nowrap"> </label>
+		<div class="col-2">
+			<button type="submit" id="register" name="register" value="register" class="btn btn-primary">
+				<span class="fas fa-user-plus"></span>
+					Sign Up
+			</button>
+		</div>
+		<div class="col-2 alert alert-secondary small text-muted align-baseline font-italic">
+		    	Please fill in all fields
+		</div>
+	</div>
+
+</form>
+
+{% else %}
+
+<div class="row mb-2">
+	<div class="col-12 mb-2">
+	  <div class="alert alert-success">
+	    <strong>Succes!</strong> Gebruiker: {{form_data.fname}} {{form_data.lname}} succesvol aangemaakt
+			{% if user.is_authenticated %}
+			en ingelogd
+			{% else %}
+			! Klik <a href="/login/">hier</a> om in te loggen...
+			{% endif %}
+	  </div>
+	</div>
+</div>
+
+{% endif %}
+
+{% endblock content %}

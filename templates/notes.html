@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% if succes %}
+<div class="row text-muted text-italic ml-5 mb-2">
+  {{succes_txt}}
+</div>
+{% endif %}
+
+<div id="row_notes">
+  <div class="row">
+    <div class="col-12">
+    {% for note in notes %}
+      <div class="notes col-3" id="show_{{note.num}}">
+          <strong> {{note.title}} </strong>
+    			<form method="POST" action="/notes/" name="notes"
+                style="display:inline-block;"
+                class="float-right needs-validation"
+                {{page.form_validate}}>
+    						{% csrf_token %}
+              <input type="hidden" name="note_id" value="{{note.id}}" />
+              <button class="close text-danger"
+                      name="delete_note" value="delete_note"
+                      aria-label="Close">
+                <span aria-hidden="true"> &times; </span>
+              </button>
+          </form>
+        <div class="font-italic my-2 small">
+          {{note.text}}
+        </div>
+        <div class="small text-muted text-right">
+           {{note.date}}
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+	<div class="col-12">
+		<script>
+				// Globals needed for pagination
+				let MAX_ROW_PER_PAGE = {{ page.max_per_page }}, /* See init.py */
+						ALL_ROW_COUNT    = {{ page.rows_count }},
+						LINKS_ON_PAGE    = Math.ceil( ALL_ROW_COUNT / MAX_ROW_PER_PAGE ),
+						LINK_ACT         = 1;
+				pagination();
+		</script>
+	</div>
+</div>
+
+<div id="id_main">
+
+</div>
+
+
+<div class="form-group row mt-4">
+  <label class="col-1 col-form-label hidden-sm hidden-xs"> </label>
+  <div class="col-11">
+    <button type="submit" id="add_btn" name="add_btn"
+            onclick="add_template('id_yyyymmdd_num'); return false;"
+            class="btn btn-primary">
+      Add notitie
+      <i class="fa fa-plus-square" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Template notitie //-->
+<div id="templates" class="d-none row">
+
+	<div id="id_yyyymmdd_num">
+    <div class="row">
+  		<div class="col-12">
+  			<form method="POST" action="/notes/" name="note"
+              class="needs-validation" id="form_id_notes"
+              {{page.form_validate}}>
+  						{% csrf_token %}
+  				<fieldset class="border p-1 m-1 rounded shadow-sm" style="background-color: #e3f2fd;">
+  					<legend class="w-auto p-1 text-muted small">
+              <button class="btn-xs btn-primary mr-2 rounded shadow-sm disabled" id="btn_save_1"
+                      aria-disabled="false" aria-hidden="true" style="width:34px;"
+                      data-placement="top" title="Save note"
+                      name="save_note" value="save_note">
+                      <i class="fa fa-file"></i>
+              </button>
+              <button class="btn-xs btn-warning btn-info mr-2 rounded shadow-sm "
+                      aria-disabled="false" style="width:34px;"
+                      onclick="delete_template('id_yyyymmdd_num'); return false;"
+                      data-placement="top" title="Remove log from screen">
+                      <i class="fa fa-eraser" aria-hidden="true"></i>
+              </button>
+  							Notitie
+  					</legend>
+            <div class="form-group row">
+              <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12 input-group">
+  								<div class="input-group-prepend">
+  									<div class="input-group-text">
+  										titel
+  									</div>
+  								</div>
+  								<input name="inputTitle" class="form-control" type="text"
+  											 placeholder="Titel" minlength="1" maxlength="50"
+                         pattern=".{1,}" {{page.input_required}}>
+  						</div>
+            </div>
+            <div class="form-group row">
+              <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12 input-group">
+  								<div class="input-group-prepend">
+  									<div class="input-group-text">
+  										datum
+  									</div>
+  								</div>
+  								<input name="inputDateSet" class="form-control"
+                         type="date" value="{{page.date_now}}">
+  						</div>
+            </div>
+  					<div class="form-group row">
+  						<div class="form-group col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+  						  <textarea class="form-control" placeholder="Note here..." rows="5"
+                          name="inputText" value=""></textarea>
+  						</div>
+  					</div>
+  				</fieldset>
+  			</form>
+  		</div>
+    </div>
+	</div>
+</div>
+
+{% endblock content %}

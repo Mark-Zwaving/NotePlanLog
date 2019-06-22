@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h3>Welkom {{ user.username }}</h3>
+<p class="alert alert-success">
+	U bent succesvol ingelogd
+</p>
+
+{% else %}
+
+<form method="post" action="/login/" class="needs-validation" {{page.form_validate}}>
+	{% csrf_token %}
+	<div class="form-group row">
+		<label for="inputEmail" class="col-3 col-form-label text-right text-nowrap"> E-mail </label>
+		<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 input-group">
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					<i class="fa fa-envelope" aria-hidden="true"></i>
+				</div>
+			</div>
+			<input id="inputEmail" name="inputEmail" type="text"
+			       class="form-control {{form_data.email_class}}"
+			       placeholder="Email" value="{{form_data.email}}"
+						 minlength="6" maxlength="245"
+						 pattern="[^@\s]{1,250}@[^@\s]{1,63}\.[^@\s]{2,63}"
+						 {{page.input_required}} />
+			 {% if form_data.err_email.found %}
+				 <div class="invalid-feedback">
+						{% for err in form_data.err_email.text %}
+		 					<strong> Error! </strong> {{ err }} <br>
+		 			  {% endfor %}
+				 </div>
+			 {% endif %}
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="inputPassword1" class="col-3 col-form-label text-right text-nowrap"> Wachtwoord </label>
+		<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 input-group">
+			<div class="input-group-prepend">
+				<button class="input-group-text lock"
+				        onclick="show_hide_password('inputPassword','lock1'); return false;">
+					<i id="lock1" class="fa fa-lock" aria-hidden="true"></i>
+				</button>
+			</div>
+			<input id="inputPassword" name="inputPassword" type="password"
+			       class="form-control {{form_data.password_class}}"
+			       placeholder="Wachtwoord" value="{{form_data.password}}"
+			       minlength="12" maxlength="30" pattern=".{12,30}"
+						 {{page.input_required}} />
+
+			 {% if form_data.err_password.found %}
+			 <div class="invalid-feedback">
+				 {% for err in form_data.err_password.text %}
+ 						<strong> Error! </strong> {{ err }} <br>
+ 				 {% endfor %}
+			 </div>
+			 {% endif %}
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label class="col-3 col-form-label text-right"> </label>
+		<div class="col-lg-4 col-md-6 col-sm-9 col-xs-12 input-group mb-2">
+			<button type="submit" class="btn btn-primary btn-lg"
+			        name="login" value="login">
+				<i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+				Login
+			</button>
+		</div>
+	</div>
+</form>
+
+{% endif %}
+
+{% endblock content %}
