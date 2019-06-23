@@ -1,0 +1,152 @@
+Note Plan & Log Website versie 1.0 Demo
+
+STAPPENPLAN
+ 1)  Installeren python nieuwste versie (of vanaf 3.7)
+ 2)  Installeren Django
+ 3)  Installeren MySQL client in Python
+ 4)  Installeren xampp of een vergelijkbare webserver met MySQL ondersteuning
+ 5)  Installeren phpMyAdmin op de webserver
+ 6)  Download of clone Note_PlanLog website van GitHub. 
+ 7)  Maken databases in Django
+ 8)  Toevoegen demo gegevens/gebruikers in de database
+ 9)  Starten Django webserver
+10)  Inloggen op de website
+11)  Jezelf registreren
+12)  Eigen Notities, Plannen en Logs schrijven
+
+
+1)  INSTALLEREN PYTHON 3 (min3.7)
+
+Download en installeren: 
+https://www.python.org/downloads/
+
+Installatie opties:
+ - As administator
+ - For all users
+ - Met pip (=package installatie manager)
+ - Add Python to path
+ - Install Python environmentvariabelen
+
+Na installatie:
+ - Check versie: 
+   python --version
+
+ - Upgrade Pip naar nieuwste versie
+   python -m pip install --upgrade pip
+
+
+2)  INSTALLEREN DJANGO
+Installatie via pip:
+   pip install Django
+
+
+3)  INSTALLEREN MYSQL CLIENT IN PYTHON
+Installatie opties:
+ - As administrator
+
+Installatie via pip:
+   pip install mysqlclient
+
+
+4)   INSTALLEREN XAMPP
+Noodzakelijk voor het gebruik van de MySQL server en phpMAdmin
+
+Download en installeren:
+https://www.apachefriends.org/download.html
+Meer info:
+https://www.apachefriends.org/faq_windows.html
+
+Installatie opties:
+ - User Account Control (UAC), geef toegang
+ - Allow private networks only
+
+
+5)  INSTALLEREN PHPMYADMIN
+Als het goed is, is phpMyAdmin automatisch geïnstalleerd.
+Open het programma phpMyAdmin door in xammp achter MySQL module 
+op admin button te klikken
+
+
+6)  DOWNLOAD OF CLONE DE WEBAPPLICATIE
+Applicatie op GitHub:
+https://github.com/Mark-Zwaving/Note_Plan_Log
+
+    A) Download en uitpakken zip bestand:
+       https://github.com/Mark-Zwaving/Note_Plan_Log/archive/master.zip
+
+    B) Of installeer via Git:
+       https://github.com/Mark-Zwaving/Note_Plan_Log.git
+
+
+7)  INSTALLEREN DATABASES VOOR DJANGO
+
+In phpMyAdmin:
+ - Klik op de hoofdserver: 127.0.0.1
+ - Klk op databases
+ - Maak een database aan genaamd: note_plan_log 
+
+Voorbereiden databases voor de app 'note_plan_log' 
+voor het gebruik van de databases en tabellen in Django:
+ - Ga naar de map met het bestand: 'manage.py'
+ - Voer de volgende commando uit:
+   python manage.py makemigrations note_plan_log
+
+Installeren databases
+ - Voer de volgende commando uit
+   python manage.py migrate
+
+Als het goed is zijn nu alle basistabellen voor het gebruik 
+in Django geïnstalleerd. Zie hiervoor eventueel ook: phpMyAdmin 
+
+
+8)  TOEVOEGEN DEMO GEGEVENS/GEBRUIKERS IN DE DATABASE
+Het toevoegen van demo gegevens gebeurt via een MySQL (dump) bestand
+Feitelijk overschrijft dit SQL dump bestand alle gegevens uit
+het vorige punt.
+
+ - Ga naar de map <sql> in de applicatie
+ - Importeer de MySQL dump bestand: 
+   'note_plan_log.sql'
+   in phpMyAdmin
+   In phpMyAdmin
+     - Ga naar de importeren button
+     - Importeer het SQL-bestand: 'note_plan_log.sql'
+
+Als het goed is, zijn nu alle demo bestanden en gebruikers 
+geïnstalleerd voor gebruik. 
+
+
+9)  STARTEN DJANGO WEBSERVER
+ - Voer de volgende commando uit:
+   python manage.py runserver
+
+Als alles goed gaat dan draait een webserver op je localhost met 
+de default Django poort van 8000
+ - Open de website in je browser met de volgende url
+   http://127.0.0.1:8000/
+   
+
+10) INLOGGEN OP DE WEBSITE
+Op de webserver zijn de volgende demo gebruikers geïnstalleerd.
+
+Log in als normale gebruiker:
+   email: demo@demo.nl
+   wachtwoord: abcd1234!@#$
+
+Log in als Admin: 
+Nu kan ook admin module van Django worden bebeken zie link Admin in menu
+   email: demo-admin@demo.nl
+   wachtwoord: abcd1234!@#$
+
+Login als beide gebruikers bekijk en test de website...
+
+
+11) JEZELF REGISTREREN
+  - Ga naar de link SignUP in het menu van de Website
+  - Registreer jezelf
+
+Als alles goed gaat ben je na de registratie automatisch ingelogd.
+
+
+12) EIGEN NOTITIES, PLANNEN EN LOGS SCHRIJVEN
+Nu ben je instaat om je eigen Notities, Planningen en logboeken te schrijven.
