@@ -20,7 +20,7 @@ web_email      =  'markzwaving@gmail.com'
 web_mobiel     =  '0681191909'
 
 web_max_logs_plans_per_page = 4
-web_max_notes_per_page      = 3
+web_max_notes_per_page      = 9
 
 mysql_db_host   =  '127.0.0.1'
 mysql_db_naam   =  'note_plan_log'
