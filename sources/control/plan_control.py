@@ -26,6 +26,7 @@ def process_post( request ):
         time_start = request.POST.get('time_start')
         time_end   = request.POST.get('time_end')
         title      = request.POST.get('title')
+        text       = request.POST.get('text')
 
         if request.POST.get('link_act'):
             link_act = request.POST.get('link_act')
