@@ -14,10 +14,10 @@ web_charset    =  'UTF-8'
 web_author     =  'Mark Zwaving'
 web_robots     =  'follow, index'
 web_viewport   =  'width=device-width, initial-scale=1, shrink-to-fit=no'
-web_adress     =  'Stokroosplein'
+web_adress     =  ''
 web_place      =  'Groningen'
-web_email      =  'markzwaving@gmail.com'
-web_mobiel     =  '0681191909'
+web_email      =  ''
+web_mobiel     =  ''
 
 web_max_logs_plans_per_page = 4
 web_max_notes_per_page      = 9
